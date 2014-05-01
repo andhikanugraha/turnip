@@ -18,118 +18,88 @@
     <![endif]-->
   </head>
   <body>
-    <div class="navbar navbar-default navbar-static-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">Turnip</a>
-        </div>
-      </div>
-    </div>
-
     <div class="container-fluid">
-      <p class="lead">Turnip is a Turing machine simulator. Enter a machine table below and characters into the tape, then click "Play".</p>
-
-      <div class="row">
-        <div class="col-xs-12 col-md-12" id="tape-container">
-          <h4>Tape</h4>
-          <div class="tape" contentEditable>
-            <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
+      <h2>Turing Machine Simulator</h2>
+      <div class="tab-content">
+        <div class="row">
+          <div class="col-xs-12 col-md-6" id="tape-editor-container">
+            <h4>Tape contents</h4>
+            <input type="text" class="form-control tape-editor" id="tape-editor" placeholder="Enter symbols here">
+            <div class="tape" id="tape"></div>
+            <div class="tape-actions">
+              <div class="pull-left">
+                <button class="btn btn-info" id="edit-button"><i class="glyphicon glyphicon-pencil"></i> <span>Finish editing tape</span></button>
+              </div>
+              <div class="pull-right">
+                <button class="btn btn-success" id="play-button"><i class="glyphicon glyphicon-play"></i> Play</button>
+                <button class="btn btn-primary" id="step-button"><i class="glyphicon glyphicon-step-forward"></i> Step</button>
+                <button class="btn btn-primary" id="reset-button"><i class="glyphicon glyphicon-backward"></i> Reset</button>
+              </div>
+            </div>
+            <h4>Instructions</h4>
+            <div class="instructions editing">
+              <ol>
+                <li>Fill in the state table on the right. You can add new rules by pressing "Add Rule".</li>
+                <li>Enter symbols on the tape above. Symbols are case-sensitive.</li>
+                <li>Press "Finish editing tape."</li>
+              </ol>
+            </div>
           </div>
-          <div class="tape-actions">
-            <button class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i> Edit</button>
-            <button class="btn btn-success"><i class="glyphicon glyphicon-play"></i> Play</button>
-            <button class="btn btn-primary"><i class="glyphicon glyphicon-step-forward"></i> Step</button>
-          </div>
-        </div>
-        <div class="col-xs-12 col-md-12" id="table-container">
-          <h4>Machine Table</h4>
-          <form class="form">
-            <table class="table table-striped table-bordered">
+          <div class="col-xs-12 col-md-6" id="table-container">
+            <h4>State table</h4>
+            <table class="table table-striped table-bordered" id="state-table">
               <thead>
                 <tr>
-                  <th>Current state</th>
-                  <th>Current symbol</th>
-                  <th>Next state</th>
-                  <th>Symbol to write</th>
-                  <th>Direction to move</th>
-                  <th><i class="glyphicon glyphicon-trash"></i></th>
+                  <th width="18%">Current state</th>
+                  <th width="18%">Current symbol</th>
+                  <th width="18%">Next state</th>
+                  <th width="18%">Symbol to write</th>
+                  <th width="18%">Direction to move</th>
+                  <th width="10%"><i class="glyphicon glyphicon-trash"></i></th>
                 </tr>
               </thead>
-              <tr id="start-rule">
-                <td class="state-name">
-                  Start
-                </td>
-                <td class="current-symbol">
-                  <input class="form-control" type="text" placeholder="Blank" maxlength="1">
-                </td>
-                <td class="next-state">
-                  <input class="form-control" type="text" placeholder="Stop" maxlength="1">
-                </td>
-                <td class="symbol-to-write">
-                  <input class="form-control" type="text" placeholder="Blank" maxlength="1">
-                </td>
-                <td class="direction">
-                  <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-default">
-                      <input type="radio" name="direction"> <i class="glyphicon glyphicon-arrow-left"></i>
-                    </label>
-                    <label class="btn btn-default">
-                      <input type="radio" name="direction" selected> Stay
-                    </label>
-                    <label class="btn btn-default">
-                      <input type="radio" name="direction"> <i class="glyphicon glyphicon-arrow-right"></i>
-                    </label>
-                  </div>
-                </td>
-                <td class="delete">
-                </td>
-              </tr>
               <tr class="template">
                 <td class="state-name">
-                  <input class="form-control" type="text" placeholder="" maxlength="1">
+                  <input class="form-control" type="text" placeholder="Default State">
                 </td>
                 <td class="current-symbol">
                   <input class="form-control" type="text" placeholder="Blank" maxlength="1">
                 </td>
                 <td class="next-state">
-                  <input class="form-control" type="text" placeholder="Stop" maxlength="1">
+                  <input class="form-control" type="text" placeholder="Default State">
                 </td>
                 <td class="symbol-to-write">
                   <input class="form-control" type="text" placeholder="Blank" maxlength="1">
                 </td>
                 <td class="direction">
-                  <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-default">
-                      <input type="radio" name="direction"> <i class="glyphicon glyphicon-arrow-left"></i>
-                    </label>
-                    <label class="btn btn-default">
-                      <input type="radio" name="direction" selected> Stay
-                    </label>
-                    <label class="btn btn-default">
-                      <input type="radio" name="direction"> <i class="glyphicon glyphicon-arrow-right"></i>
-                    </label>
-                  </div>
+                  <select class="form-control">
+                    <option value="L">Left</option>
+                    <option value="R">Right</option>
+                    <option value="N">Don't move</option>
+                  </select>
                 </td>
                 <td class="delete">
-                  <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+                  <button class="btn btn-danger delete-button btn-block"><i class="glyphicon glyphicon-trash"></i></button>
                 </td>
               </tr>
               <tfoot>
                 <tr id="add-rule">
                   <td colspan="6">
-                    <button class="btn btn-info btn-block"><i class="glyphicon glyphicon-plus"></i> Add Rule</button>
+                    <button id="add-rule-button" class="btn btn-info btn-block"><i class="glyphicon glyphicon-plus"></i> Add Rule</button>
                   </td>
                 </tr>
               </tfoot>
             </table>
-          </form>
         </div>
       </div>
+
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery-1.11.0.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/turingmachine.js"></script>
+    <script src="js/turnip.js"></script>
   </body>
 </html>

@@ -1,16 +1,37 @@
+body {
+	font-family: Segoe UI;
+}
+
+h2 {
+	font-family: 'Segoe UI Light', Segoe UI;
+	font-weight: 300;
+}
+
+.tape-editor {
+	font-family: Consolas, monospace;
+	font-size: 24px;
+	line-height: 42px;
+	height: 42px;
+	padding: 0 6px;
+	letter-spacing: 13px;
+	color: #000;
+}
 .tape {
 	font-family: Consolas, monospace;
 	font-size: 24px;
 	line-height: 36px;
-	margin-bottom: 15px;
 	max-width: 100%;
-	overflow-x: scroll;
+	overflow-x: auto;
 	border: 1px solid #eee;
+	display: inline-block;
 }
 .tape span {
 	border-left: 1px solid #eee;
 	padding: 1px 6px;
 	cursor: pointer;
+}
+.tape span.active {
+	font-weight: bold;
 }
 .tape span:first-child {
 	border-left-width: 0;
@@ -19,4 +40,46 @@
 	background: #f00;
 }
 .tape[contenteditable] {
+}
+.template {
+	display: none
+}
+
+#state-table td, #state-table th, #state-table input, #state-table select {
+	text-align: center;
+	min-width: 3em;
+	font-size: 12px;
+	line-height: 1.3;
+}
+#state-table th {
+	padding: 6px 3px;
+	background: #eee;
+}
+#state-table tbody td {
+	padding: 1px;
+}
+#state-table tfoot {
+	background: #eee
+}
+#state-table input, #state-table select {
+	border: none;
+	box-shadow: none;
+	border-radius: 0;
+}
+#state-table tbody td.delete {
+	padding: 3px;
+}
+#state-table tbody td button {
+	padding: 4px 10px;
+}
+
+#mode-nav a i {
+	margin-right: 4px;
+}
+
+.tape-actions {
+	float: left;
+	width: 100%;
+	padding-top: 10px;
+	margin-bottom: 20px;
 }
